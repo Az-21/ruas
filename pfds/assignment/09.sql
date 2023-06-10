@@ -88,7 +88,17 @@ FROM
 WHERE
   Price > 100;
 
--- Part H || NOTE: SQLite does not support INSERT INTO
+-- Part H
+DROP TABLE IF EXISTS ArchivedProducts;
+CREATE TABLE ArchivedProducts (
+  ProductID INT PRIMARY KEY,
+  ProductName TEXT NOT NULL,
+  Price FLOAT NOT NULL,
+  Stock INT NOT NULL,
+  DiscontinuedDate DATE NOT NULL, -- YYYY-MM-DD
+  Reason TEXT NOT NULL
+);
+
 INSERT INTO
   ArchivedProducts
 SELECT * FROM DiscontinuedProducts;
