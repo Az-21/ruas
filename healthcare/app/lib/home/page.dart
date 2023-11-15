@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 160,
+        toolbarHeight: 120,
         title: const Text("Maternal Health Risk Classifier"),
       ),
       body: Classifier(),
