@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 
 typedef FeatureVector = ({
   double age,
@@ -70,12 +71,15 @@ Classification classify(FeatureVector x) {
   double highRiskScore = perceptron(x, riskClassHigh);
 
   List<double> scores = [lowRiskScore, mediumRiskScore, highRiskScore];
+  if (kDebugMode) {
+    print(scores);
+  }
   scores.sort();
   double max = scores[2];
 
   // Confidence score calculation using softmax function
   double nConfidence = 100 * exp(max) / (exp(lowRiskScore) + exp(mediumRiskScore) + exp(highRiskScore));
-  String confidence = nConfidence.toString();
+  String confidence = "${nConfidence.toStringAsFixed(2)}%";
 
   // Category assignment
   String category = "";
