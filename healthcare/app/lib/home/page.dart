@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 160,
         title: const Text("Maternal Health Risk Classifier"),
-        actions: [IconButton.filledTonal(onPressed: () {}, icon: const Icon(Icons.info))],
       ),
       body: Classifier(),
     );
