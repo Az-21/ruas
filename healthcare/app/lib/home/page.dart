@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mhrc/home/svm_logic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -140,13 +141,13 @@ class _ClassifierState extends State<Classifier> {
                 foregroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.onError),
                 backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.error),
               ),
-              onPressed: () {},
+              onPressed: resetFields,
               icon: const Icon(Icons.restore),
               label: const Text("Reset"),
             ),
             const SizedBox(width: 16),
             FilledButton.tonalIcon(
-              onPressed: () {},
+              onPressed: runClassifier,
               icon: const Icon(Icons.check_circle),
               label: const Text("Estimate"),
             ),
@@ -168,5 +169,51 @@ class _ClassifierState extends State<Classifier> {
         )
       ],
     );
+  }
+
+  void resetFields() {
+    age.text = "";
+    pressureS.text = "";
+    pressureD.text = "";
+    sugar.text = "";
+    temperature.text = "";
+    heartRate.text = "";
+    category = "";
+    confidence = "";
+    setState(() {
+      category = "";
+      confidence = "";
+    });
+  }
+
+  void setToZeroIfEmpty(TextEditingController field) {
+    if (field.text == "") field.text = "0";
+  }
+
+  void ensureFieldsAreNotEmpty() {
+    setToZeroIfEmpty(age);
+    setToZeroIfEmpty(pressureS);
+    setToZeroIfEmpty(pressureD);
+    setToZeroIfEmpty(sugar);
+    setToZeroIfEmpty(temperature);
+    setToZeroIfEmpty(heartRate);
+  }
+
+  void runClassifier() {
+    ensureFieldsAreNotEmpty();
+    FeatureVector x = (
+      age: double.parse(age.text),
+      pressureS: double.parse(pressureS.text),
+      pressureD: double.parse(pressureD.text),
+      sugar: double.parse(sugar.text),
+      temperature: double.parse(temperature.text),
+      heartRate: double.parse(heartRate.text),
+    );
+
+    Classification output = classify(x);
+    setState(() {
+      category = output.category;
+      confidence = output.confidence;
+    });
   }
 }
