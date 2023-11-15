@@ -20,7 +20,7 @@ typedef SvmModelAttribute = ({
   double heartRate,
 });
 
-const SvmModelAttribute riskClassLow = (
+const SvmModelAttribute riskClassHigh = (
   bias: -100.03782366,
   age: -0.00540497,
   pressureS: 0.07666348,
@@ -30,7 +30,7 @@ const SvmModelAttribute riskClassLow = (
   heartRate: 0.01780048,
 );
 
-const SvmModelAttribute riskClassMedium = (
+const SvmModelAttribute riskClassLow = (
   bias: -28.66955583,
   age: -0.00601977,
   pressureS: 0.00449086,
@@ -40,7 +40,7 @@ const SvmModelAttribute riskClassMedium = (
   heartRate: 0.04471379,
 );
 
-const SvmModelAttribute riskClassHigh = (
+const SvmModelAttribute riskClassMedium = (
   bias: 51.37882767,
   age: -0.00195045,
   pressureS: -0.05715203,
