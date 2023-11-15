@@ -70,16 +70,20 @@ Classification classify(FeatureVector x) {
   double mediumRiskScore = perceptron(x, riskClassMedium);
   double highRiskScore = perceptron(x, riskClassHigh);
 
+  // Confidence score calculation using softmax function
+  double sigmaScore = exp(lowRiskScore) + exp(mediumRiskScore) + exp(highRiskScore);
+  double cl = 100 * exp(lowRiskScore) / sigmaScore;
+  double cm = 100 * exp(mediumRiskScore) / sigmaScore;
+  double ch = 100 * exp(highRiskScore) / sigmaScore;
+  String confidence =
+      "Low Risk: ${cl.toStringAsFixed(2)}%\nMedium Risk: ${cm.toStringAsFixed(2)}%\nHigh Risk: ${ch.toStringAsFixed(2)}%";
+
   List<double> scores = [lowRiskScore, mediumRiskScore, highRiskScore];
   if (kDebugMode) {
     print(scores);
   }
   scores.sort();
   double max = scores[2];
-
-  // Confidence score calculation using softmax function
-  double nConfidence = 100 * exp(max) / (exp(lowRiskScore) + exp(mediumRiskScore) + exp(highRiskScore));
-  String confidence = "${nConfidence.toStringAsFixed(2)}%";
 
   // Category assignment
   String category = "";
