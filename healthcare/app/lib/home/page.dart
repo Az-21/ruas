@@ -25,6 +25,18 @@ class Classifier extends StatefulWidget {
 }
 
 class _ClassifierState extends State<Classifier> {
+  // Inputs
+  var age = TextEditingController();
+  var pressureS = TextEditingController();
+  var pressureD = TextEditingController();
+  var sugar = TextEditingController();
+  var temperature = TextEditingController();
+  var heartRate = TextEditingController();
+
+  // Outputs
+  String category = "";
+  String confidence = "";
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -33,6 +45,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.face),
           title: TextField(
+            controller: age,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Age",
@@ -46,6 +59,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.move_up),
           title: TextField(
+            controller: pressureS,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Systolic Blood Pressure",
@@ -60,6 +74,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.move_down),
           title: TextField(
+            controller: pressureD,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Diastolic Blood Pressure",
@@ -74,6 +89,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.bloodtype),
           title: TextField(
+            controller: sugar,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Blood Sugar",
@@ -88,6 +104,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.thermostat),
           title: TextField(
+            controller: temperature,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Body Temperature",
@@ -102,6 +119,7 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.monitor_heart),
           title: TextField(
+            controller: heartRate,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Heart Rate",
@@ -139,14 +157,14 @@ class _ClassifierState extends State<Classifier> {
         ListTile(
           leading: const Icon(Icons.category),
           title: const Text("Risk Category"),
-          subtitle: Text("TODO"),
+          subtitle: Text(category),
         ),
 
         // Confidence scores
         ListTile(
           leading: const Icon(Icons.speed),
           title: const Text("Confidence"),
-          subtitle: Text("TODO"),
+          subtitle: Text(confidence),
         )
       ],
     );
